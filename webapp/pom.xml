@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
@@ -8,27 +8,40 @@
   <artifactId>maven-project</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
+  <name>Maven Parent Project</name>
+  <description>Parent POM for multi-module Maven project.</description>
 
   <modules>
     <module>server</module>
     <module>webapp</module>
+    <!-- Add other modules here -->
   </modules>
 
-  <name>Maven Project</name>
-  <description>Parent project for server and webapp modules.</description>
+  <properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 
   <build>
     <pluginManagement>
       <plugins>
-        <!-- Maven Compiler Plugin with JDK 17 -->
+        <!-- Java Compiler Plugin -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.11.0</version>
           <configuration>
-            <source>17</source>
-            <target>17</target>
+            <source>${maven.compiler.source}</source>
+            <target>${maven.compiler.target}</target>
           </configuration>
+        </plugin>
+
+        <!-- WAR Plugin (for web modules) -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>3.4.0</version>
         </plugin>
       </plugins>
     </pluginManagement>
